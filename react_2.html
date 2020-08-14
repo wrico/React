@@ -27,22 +27,25 @@
     <div id="react"> </div>
 
     <script>
-        const jsContainer = document.getElementById("js")
-        const reactContainer = document.getElementById("react")
+        const jsContainer = document.getElementById("js");
+        const reactContainer = document.getElementById("react");
+        const render = () => {
+            jsContainer.innerHTML = `<div class="demo"> Hello JS <input />
+                    <p>${new Date().toLocaleTimeString()}</p>
+                </div> `;
+            ReactDOM.render(
+                React.createElement("div", { className: "demo" }, "Hello React ",
+                    React.createElement("input"),
+                    React.createElement( "p", null, new Date().toLocaleTimeString()),
+                    React.createElement( "p", null, "Aqui vc pode digitar no Input"),
+                    React.createElement( "p", null, "O React não reinderiza a div inteira"),
+                    React.createElement( "p", null, "somente o paragrafo da hora")
 
-        jsContainer.innerHTML = `<div class="demo"> Hello JS </div> `
-
-        ReactDOM.render(
-            React.createElement(
-                "div",
-                { className: "demo" }, "Hello React" ),
-            reactContainer
-        );
-        /* React.createElement possui vários argumentos:
-            O primeiro é a tag HTML
-            O segundo é um objeto que representa os atributos. Para igualar o exemplo com JS puro nós usamos { className: “demo” }, que traduz para class=”demo”. Note como usamos className ao invés de class nos atributos porque com React é o JS que equivale à API, não o HTML em si.
-            O terceiro é o conteúdo, que seria nosso texto “Hello React”.
-        */
+                ),
+                reactContainer
+            );
+        }
+        setInterval(render, 1000);
 
     </script>
 
